@@ -1,45 +1,38 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import Directory from "./components/directory/directory.component";
+const App = () => {
+  const categories = [
+    {
+      id: 1,
+      title: "hats",
+      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
+    },
+    {
+      id: 2,
+      title: "jackets",
+      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
+    },
+    {
+      id: 3,
+      title: "sneakers",
+      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
+    },
+    {
+      id: 4,
+      title: "womens",
+      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
+    },
+    {
+      id: 5,
+      title: "mens",
+      imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
+    },
+  ];
 
-import Homepage from "./pages/homepage/homepage.components";
-import ShopPage from "./pages/shop/shop.components";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import Header from "./components/header/header.component";
-import { auth } from "./firebase/firebase.utils";
-import { Component } from "react";
-
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      curruntUser: null,
-    };
-  }
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ curruntUser: user });
-      console.log(user);
-    });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
-
-  render() {
-    return (
-      <>
-        <Header curruntUser={this.state.curruntUser} />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="shop" element={<ShopPage />} />
-          <Route path="signIn" element={<SignInAndSignUpPage />} />
-        </Routes>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Directory categories={categories} />
+    </>
+  );
+};
 
 export default App;
